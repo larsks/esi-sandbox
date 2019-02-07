@@ -28,4 +28,5 @@ sudo openstack tripleo deploy \
   -r /usr/share/openstack-tripleo-heat-templates/roles/Standalone.yaml \
   -e ./standalone_parameters.yaml \
   --output-dir . \
-  --standalone
+  --standalone \
+  "$@"
