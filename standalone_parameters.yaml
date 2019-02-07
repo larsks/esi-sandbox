@@ -1,0 +1,47 @@
+parameter_defaults:
+  CertmongerCA: local
+  CloudName: 192.168.1.2
+  ContainerImagePrepare:
+  - set:
+      ceph_image: daemon
+      ceph_namespace: docker.io/ceph
+      ceph_tag: v3.0.3-stable-3.0-luminous-centos-7-x86_64
+      name_prefix: centos-binary-
+      name_suffix: ''
+      namespace: docker.io/tripleomaster
+      neutron_driver: null
+      tag: current-tripleo
+    tag_from_label: rdo_version
+  ControlPlaneStaticRoutes: []
+  Debug: true
+  DeploymentUser: stack
+  DnsServers:
+    - 1.1.1.1
+    - 8.8.8.8
+  DockerInsecureRegistryAddress:
+  - 192.168.1.2:8787
+  NeutronPublicInterface: em2
+  # domain name used by the host
+  #NeutronDnsDomain: example.com.
+  #NeutronPluginExtensions: "qos,port_security,dns_domain_ports"
+  # re-use ctlplane bridge for public net
+  NeutronBridgeMappings: datacentre:br-ctlplane
+  NeutronPhysicalBridge: br-ctlplane
+  NeutronFlatNetworks: datacentre
+  # enable to force metadata for public net
+  #NeutronEnableForceMetadata: true
+  StandaloneEnableRoutedNetworks: false
+  StandaloneHomeDir: /home/stack
+  StandaloneLocalMtu: 1500
+  PasswordAuthentication: 'yes'
+  #DockerOptions: '--log-driver=journald --signature-verification=false --iptables=false --live-restore --graph /tzumainn'
+  IronicEnabledHardwareTypes:
+  - ipmi
+  IronicEnabledPowerInterfaces:
+  - ipmitool
+  IronicEnabledManagementInterfaces:
+  - ipmitool
+  IronicCleaningDiskErase: 'metadata'
+  IronicInspectorSubnets:
+  - ip_range: 192.168.1.200,192.168.1.250
+  IronicInspectorInterface: 'br-ctlplane'
