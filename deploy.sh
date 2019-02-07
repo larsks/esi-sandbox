@@ -1,7 +1,6 @@
 ## Create backup of modified packaged files and copy new versions
 
 # disable NovaCompute
-sudo cp standalone-tripleo.yaml.ironic /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml
 sudo cp files/standalone-tripleo.yaml.ironic /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml
 
 # disable ftype check
