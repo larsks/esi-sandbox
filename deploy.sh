@@ -1,7 +1,7 @@
 ## Create backup of modified packaged files and copy new versions
 
 # disable NovaCompute
-sudo cp standalone-tripleo.yaml.ironic /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml.orig
+sudo cp standalone-tripleo.yaml.ironic /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml
 sudo cp files/standalone-tripleo.yaml.ironic /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml
 
 # disable ftype check
@@ -16,17 +16,17 @@ export NETMASK=24
 export INTERFACE=em2
 
 openstack tripleo container image prepare default \
-  --output-env-file `pwd`/containers-prepare-parameters.yaml
+  --output-env-file ./containers-prepare-parameters.yaml
 
 sudo openstack tripleo deploy \
   --templates \
   --local-ip=$IP/$NETMASK \
   -e /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml \
   -r /usr/share/openstack-tripleo-heat-templates/roles/Standalone.yaml \
-  -e `pwd`/containers-prepare-parameters.yaml \
+  -e ./containers-prepare-parameters.yaml \
   -e /usr/share/openstack-tripleo-heat-templates/environments/services/ironic.yaml \
   -e /usr/share/openstack-tripleo-heat-templates/environments/services/ironic-inspector.yaml \
   -r /usr/share/openstack-tripleo-heat-templates/roles/Standalone.yaml \
-  -e `pwd`/standalone_parameters.yaml \
-  --output-dir `pwd` \
+  -e ./standalone_parameters.yaml \
+  --output-dir . \
   --standalone
