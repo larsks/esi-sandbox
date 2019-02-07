@@ -1,9 +1,14 @@
-# Create backup of modified packaged files and copy new versions
+## Create backup of modified packaged files and copy new versions
+
+# disable NovaCompute
 sudo cp standalone-tripleo.yaml.ironic /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml.orig
 sudo cp standalone-tripleo.yaml.ironic /usr/share/openstack-tripleo-heat-templates/environments/standalone/standalone-tripleo.yaml
 
+# disable ftype check
 sudo cp /usr/share/ansible/roles/container-registry/tasks/docker.yml /usr/share/ansible/roles/container-registry/tasks/docker.yml.orig
 sudo cp docker.yml.noftypecheck /usr/share/ansible/roles/container-registry/tasks/docker.yml
+
+## Deploy
 
 export NETWORK=192.168.1
 export IP=$NETWORK.2
