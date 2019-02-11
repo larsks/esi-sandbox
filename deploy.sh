@@ -29,6 +29,7 @@ openstack tripleo container image prepare default \
   --output-env-file ./containers-prepare-parameters.yaml
 
 mkdir -p deploy
+mkdir -p /tmp/ceph_ansible_fetch
 
 deploy_args=(
   -e $TEMPLATES/environments/standalone/standalone-tripleo.yaml

@@ -6,3 +6,4 @@ parameter_defaults:
   GnocchiRbdPoolName: esi
   CephClientUserName: admin
 
+  LocalCephAnsibleFetchDirectoryBackup: /tmp/ceph_ansible_fetch
