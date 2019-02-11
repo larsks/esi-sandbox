@@ -2,8 +2,9 @@ parameter_defaults:
   NovaRbdPoolName: esi
   CinderRbdPoolName: esi
   CinderBackupRbdPoolName: esi
-  GlanceRbdPoolName: esi
   GnocchiRbdPoolName: esi
   CephClientUserName: admin
 
   LocalCephAnsibleFetchDirectoryBackup: /tmp/ceph_ansible_fetch
+
+  GlanceBackend: swift
