@@ -38,7 +38,7 @@ deploy_args=(
 
   # Enable external ceph
   -e $TEMPLATES/environments/ceph-ansible/ceph-ansible-external.yaml
-  -e ./ceph-pool-names.yaml
+  -e ./ceph-local-config.yaml
   -e ./ceph-credentials.yaml
 
   # Local settings
