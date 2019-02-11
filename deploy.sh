@@ -9,6 +9,13 @@ INTERFACE=em2
 # before running deploy.sh.
 : ${TEMPLATES:=/usr/share/openstack-tripleo-heat-templates}
 
+## sanity checks
+
+if ! rpm --quiet -q ceph-ansible; then
+	echo "***ERROR*** Cannot continue without ceph-ansible package" >&2
+	exit 1
+fi
+
 ## Create backup of modified packaged files and copy new versions
 
 mkdir -p backup
