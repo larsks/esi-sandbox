@@ -46,6 +46,10 @@ deploy_args=(
   -e ./standalone_parameters.yaml
 )
 
+if [ -f ./local.yaml ]; then
+  deploy_args+=(-e ./local.yaml)
+fi
+
 sudo openstack tripleo deploy \
   --templates $TEMPLATES \
   --local-ip=$IP/$NETMASK \
