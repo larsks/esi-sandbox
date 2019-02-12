@@ -9,3 +9,9 @@ parameter_defaults:
   CephExternalMonHost: '192.168.16.1,192.168.16.2,192.168.16.3'
 
   LocalCephAnsibleFetchDirectoryBackup: /tmp/ceph_ansible_fetch
+
+  # Disable ceph for cinder, because it's not supported for boot-from-volume
+  # with ironic.
+  CinderEnableRbdBackend: false
+  CinderEnableIscsiBackend: true
+  CinderBackupBackend: swift
