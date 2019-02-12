@@ -30,6 +30,8 @@ fi
 sudo cp files/docker.yml.noftypecheck \
 	/usr/share/ansible/roles/container-registry/tasks/docker.yml
 
+sudo cp files/lvmlocal.conf /etc/lvm/lvmlocal.conf
+
 ## Deploy
 
 openstack tripleo container image prepare default \
