@@ -8,7 +8,7 @@ apt-get clean
 echo "ISCSI_AUTO=true" > /etc/iscsi/iscsi.initramfs
 update-initramfs -u
 
-sed -i '/GRUB_CMDLINE_LINUX/ s/"$/ rd.iscsi.firmware=1"/' \
+sed -i '/GRUB_CMDLINE_LINUX/ s/"$/ rd.iscsi.firmware=1 ci.ds=OpenStack"/' \
 	/etc/default/grub
 
 update-grub
