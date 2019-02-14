@@ -31,8 +31,11 @@ parameter_defaults:
   NeutronBridgeMappings: datacentre:br-ctlplane
   NeutronPhysicalBridge: br-ctlplane
   NeutronFlatNetworks: datacentre
-  # enable to force metadata for public net
-  #NeutronEnableForceMetadata: true
+
+  # configure neutron to always provide routes to the metadata
+  # service via dhcp
+  NeutronEnableForceMetadata: true
+
   StandaloneEnableRoutedNetworks: false
   StandaloneHomeDir: /home/stack
   StandaloneLocalMtu: 1500
