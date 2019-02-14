@@ -54,6 +54,7 @@ deploy_args=(
   # Local settings
   -e ./containers-prepare-parameters.yaml
   -e ./standalone_parameters.yaml
+  -e ./image-config.yaml
 )
 
 if [ -f ./local.yaml ]; then
