@@ -1,0 +1,5 @@
+---
+- name: generate default ContainerPrepareImage configuration
+  command: >
+    openstack tripleo container image prepare default
+    --output-env-file ./container-prepare-parameters.yaml

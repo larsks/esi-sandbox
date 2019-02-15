@@ -1,0 +1,28 @@
+---
+- name: create networks
+  os_network:
+    cloud: standalone
+    name: "{{ item.name }}"
+    provider_network_type: "{{ item.provider_network_type|default(omit) }}"
+    provider_physical_network: "{{ item.provider_physical_network|default(omit) }}"
+    shared: "{{ item.shared|default(false) }}"
+    project: "{{ item.project }}"
+  loop: "{{ standalone_networks }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: create subnets
+  os_subnet:
+    cloud: standalone
+    network_name: "{{ item.0.name }}"
+    name: "{{ item.0.name }}-subnet-{{i}}"
+    cidr: "{{ item.1.subnet_range }}"
+    allocation_pool_start: "{{ item.1.allocation_pool.0 }}"
+    allocation_pool_end: "{{ item.1.allocation_pool.1 }}"
+    enable_dhcp: "{{ item.1.dhcp|default(omit) }}"
+    gateway_ip: "{{ item.1.gateway|default(omit) }}"
+    dns_nameservers: "{{ item.1.dns_nameservers|default(omit) }}"
+  loop: "{{ standalone_networks|subelements('subnets') }}"
+  loop_control:
+    index_var: i
+    label: "{{ item.0.name }}-subnet-{{i}}"

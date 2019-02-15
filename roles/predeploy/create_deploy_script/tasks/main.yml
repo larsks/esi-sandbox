@@ -1,0 +1,6 @@
+---
+- name: create deploy script
+  template:
+    src: deploy.j2.sh
+    dest: ./deploy.sh
+    mode: "0755"

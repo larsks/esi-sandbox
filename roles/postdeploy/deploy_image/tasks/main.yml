@@ -1,0 +1,41 @@
+---
+- name: download deploy kernel and ramdisk
+  get_url:
+    url: "{{ item.url }}"
+    dest: "./{{ item.name }}"
+  loop:
+    - url: "{{ deploy_ramdisk_url }}"
+      name: bm-deploy-ramdisk
+    - url: "{{ deploy_kernel_url }}"
+      name: bm-deploy-kernel
+  register: deploy_image_download
+
+- name: upload deploy kernel to glance
+  tags: [upload]
+  os_image:
+    cloud: standalone
+    disk_format: aki
+    container_format: aki
+    is_public: true
+    filename: bm-deploy-kernel
+    name: bm-deploy-kernel
+
+- name: upload deploy ramdisk to glance
+  tags: [upload]
+  os_image:
+    cloud: standalone
+    disk_format: ari
+    container_format: ari
+    is_public: true
+    filename: bm-deploy-ramdisk
+    name: bm-deploy-ramdisk
+
+- name: copy image and kernel to /var/lib/ironic/httpboot
+  become: true
+  command: >
+    cp {{ item.src }} {{ ironic_httpboot }}/{{ item.dest }}
+  loop:
+    - src: bm-deploy-kernel
+      dest: agent.kernel
+    - src: bm-deploy-ramdisk
+      dest: agent.ramdisk

@@ -1,0 +1,12 @@
+---
+- name: create flavors
+  tags: [flavors]
+  os_nova_flavor:
+    cloud: standalone
+    name: "{{ item.name }}"
+    is_public: "{{ item.public|default(true) }}"
+    disk: "{{ item.disk|default(omit) }}"
+    vcpus: "{{ item.vcups|default(omit) }}"
+    ram: "{{ item.ram|default(omit) }}"
+    extra_specs: "{{ item.properties|default(omit) }}"
+  loop: "{{ standalone_flavors }}"

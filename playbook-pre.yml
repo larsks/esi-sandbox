@@ -1,0 +1,11 @@
+- hosts: controller
+  tags: [hostprep]
+  roles:
+    - tripleo_deps
+
+- hosts: controller
+  tags: [predeploy]
+  roles:
+    - predeploy/image_prepare
+    - predeploy/create_config
+    - predeploy/create_deploy_script

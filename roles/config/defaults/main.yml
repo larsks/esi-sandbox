@@ -1,0 +1,49 @@
+---
+standalone_subnet: 192.168.23.0/24
+standalone_ip: "{{ standalone_subnet|nthhost(1) }}"
+standalone_interface: eth1
+standalone_range_inspection: "{{ standalone_subnet|nthhost(200) }},{{ standalone_subnet|nthhost(250) }}"
+standalone_home: "{{ ansible_user_dir }}"
+standalone_output_dir: deploy
+standalone_nameservers:
+  - 8.8.8.8
+  - 1.1.1.1
+
+tripleo_heat_templates_dir: /usr/share/openstack-tripleo-heat-templates
+
+deploy_args:
+  - "-e {{ tripleo_heat_templates_dir }}/environments/standalone/standalone-tripleo.yaml"
+  - "-r {{ tripleo_heat_templates_dir }}/roles/Standalone.yaml"
+  - "-e {{ tripleo_heat_templates_dir }}/environments/services/ironic.yaml"
+  - "-e {{ tripleo_heat_templates_dir }}/environments/services/ironic-inspector.yaml"
+  - "-e {{ tripleo_heat_templates_dir }}/environments/services/neutron-ovn-standalone.yaml"
+  - "-e ./standalone_parameters.yaml"
+
+standalone_networks:
+  - name: provisioning
+    project: service
+    provider_network_type: flat
+    provider_physical_network: provision
+    shared: true
+    subnets:
+      - subnet_range: "{{ standalone_subnet }}"
+        gateway: "{{ standalone_ip }}"
+        allocation_pool:
+          - "{{ standalone_subnet|nthhost(10) }}"
+          - "{{ standalone_subnet|nthhost(199) }}"
+        dhcp: true
+        dns_nameservers: "{{ standalone_nameservers|to_json }}"
+
+standalone_flavors:
+  - name: baremetal
+    public: true
+    vcups: 1
+    disk: 10
+    ram: 2048
+    properties:
+      resources:CUSTOM_BAREMETAL: 1
+      resources:DISK_GB: 0
+      resources:MEMORY_MB: 0
+      resources:VCPU: 0
+
+ironic_httpboot: /var/lib/ironic/httpboot

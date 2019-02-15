@@ -1,0 +1,6 @@
+- hosts: controller
+  tags: [postdeploy]
+  roles:
+    - postdeploy/networks
+    - postdeploy/deploy_image
+    - postdeploy/flavors

@@ -1,0 +1,23 @@
+---
+- name: install tripleo-repos
+  become: true
+  package:
+    name: "{{ tripleo_repos_url }}"
+    state: installed
+
+- name: activate delorean repositories
+  become: true
+  command: >
+    tripleo-repos {{ tripleo_delorean_repo }}
+
+- name: upgrade installed packages
+  become: true
+  package:
+    name: '*'
+    state: latest
+
+- name: install python-tripleoclient
+  become: true
+  package:
+    name: python-tripleoclient
+    state: installed

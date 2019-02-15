@@ -1,0 +1,41 @@
+---
+resource_registry:
+  OS::TripleO::Services::NovaCompute: OS::Heat::None
+
+parameter_defaults:
+  CertmongerCA: local
+  CloudName: {{ standalone_ip }}
+  ControlPlaneStaticRoutes: []
+  Debug: true
+  DeploymentUser: stack
+  DnsServers: {{ standalone_nameservers|to_yaml }}
+  DockerInsecureRegistryAddress:
+    - {{ standalone_ip }}:8787
+  NeutronPublicInterface: {{ standalone_interface }}
+  NeutronBridgeMappings: provision:br-ctlplane
+  NeutronPhysicalBridge: br-ctlplane
+  NeutronFlatNetworks: provision
+  NeutronNetworkVLANRanges: ''
+  NeutronMechanismDrivers: ovn,baremetal
+
+  # configure neutron to always provide routes to the metadata
+  # service via dhcp
+  NeutronEnableForceMetadata: true
+
+  StandaloneEnableRoutedNetworks: false
+  StandaloneHomeDir: {{ standalone_home }}
+  StandaloneLocalMtu: 1500
+  PasswordAuthentication: 'no'
+  DockerOptions: >-
+    --log-driver=journald --signature-verification=false
+    --iptables=false --live-restore
+  IronicEnabledHardwareTypes:
+    - ipmi
+  IronicEnabledPowerInterfaces:
+    - ipmitool
+  IronicEnabledManagementInterfaces:
+    - ipmitool
+  IronicCleaningDiskErase: 'metadata'
+  IronicInspectorSubnets:
+    - ip_range: "{{ standalone_range_inspection }}"
+  IronicInspectorInterface: 'br-ctlplane'

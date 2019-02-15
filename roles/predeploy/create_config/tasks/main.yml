@@ -1,0 +1,5 @@
+---
+- name: generate standalone_parameters.yaml
+  template:
+    src: standalone_parameters.j2.yaml
+    dest: ./standalone_parameters.yaml
