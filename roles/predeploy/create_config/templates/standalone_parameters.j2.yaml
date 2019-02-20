@@ -2,6 +2,11 @@
 resource_registry:
   OS::TripleO::Services::NovaCompute: OS::Heat::None
 
+  # These services are disabled my neutron-ovn-standalone.yaml and must be
+  # explicitly re-enabled to support Ironic.
+  OS::TripleO::Services::NeutronDhcpAgent: /usr/share/openstack-tripleo-heat-templates/deployment/neutron/neutron-dhcp-container-puppet.yaml
+  OS::TripleO::Services::NeutronMetadataAgent: /usr/share/openstack-tripleo-heat-templates/deployment/neutron/neutron-metadata-container-puppet.yaml
+
 parameter_defaults:
   CertmongerCA: local
   CloudName: {{ standalone_ip }}
