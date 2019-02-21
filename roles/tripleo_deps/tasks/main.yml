@@ -1,9 +1,14 @@
 ---
+- name: install delorean-current repo
+  get_url:
+    url: "{{ delorean_current_repo }}"
+    dest: /etc/yum.repos.d/delorean.repo
+
 - name: install tripleo-repos
   become: true
   package:
-    name: "{{ tripleo_repos_url }}"
-    state: installed
+    name: "python2-tripleo-repos"
+    state: latest
 
 - name: activate delorean repositories
   become: true
