@@ -9,3 +9,4 @@
     - predeploy/image_prepare
     - predeploy/create_config
     - predeploy/create_deploy_script
+    - predeploy/userconfig

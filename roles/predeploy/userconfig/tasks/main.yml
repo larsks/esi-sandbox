@@ -1,0 +1,7 @@
+---
+- name: export OS_CLOUD in bashrc
+  lineinfile:
+    path: .bashrc
+    insertafter: "^# User specific aliases and functions"
+    line: "export OS_CLOUD=standalone"
+    regexp: "^export OS_CLOUD"
