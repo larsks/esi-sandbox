@@ -21,6 +21,6 @@ sudo openstack tripleo deploy \
   --local-ip={{ standalone_ip }}/{{ standalone_subnet|ipaddr('prefix') }} \
   --output-dir deploy \
   --standalone \
-  "${deploy_args[@]}" \
   -e ./container-images.yaml \
+  "${deploy_args[@]}" \
   "$@"
