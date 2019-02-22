@@ -1,5 +1,6 @@
 ---
 - name: install delorean-current repo
+  become: true
   get_url:
     url: "{{ delorean_current_repo }}"
     dest: /etc/yum.repos.d/delorean.repo
