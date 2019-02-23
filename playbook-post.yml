@@ -1,6 +1,7 @@
 - hosts: controller
   tags: [postdeploy]
   roles:
+    - postdeploy/credentials
     - postdeploy/userconfig
     - postdeploy/networks
     - postdeploy/deploy_image
