@@ -1,0 +1,24 @@
+---
+- name: create stack user
+  become: true
+  user:
+    name: stack
+    comment: Stack User
+
+- name: grant stack user sudo privileges
+  become: true
+  template:
+    src: stack.j2.sudo
+    dest: /etc/sudoers.d/stack
+    mode: "0440"
+    owner: root
+    group: root
+
+- name: install ssh keys for root and stack users
+  become: true
+  authorized_key:
+    user: "{{ item }}"
+    key: "{{ lookup('file', 'authorized_keys') }}"
+  loop:
+    - root
+    - stack
