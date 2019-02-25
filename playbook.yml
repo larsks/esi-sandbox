@@ -1,0 +1,5 @@
+---
+- import_playbook: playbook-host.yml
+- import_playbook: playbook-pre.yml
+- import_playbook: playbook-deploy.yml
+- import_playbook: playbook-post.yml

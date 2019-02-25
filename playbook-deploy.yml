@@ -1,0 +1,11 @@
+---
+# This can take a long time (~1 hour) to run, and do to the way Ansible
+# operates it will produce no output. You can log into the controller and
+# watch the deploy.log file to see how the deploy is progressing.
+- name: run openstack tripleo deploy
+  hosts: controller
+  tags: [deploy]
+  tasks:
+    - name: run tripleo deploy
+      shell: >-
+        ./deploy.sh 2>&1 | tee deploy.log
