@@ -3,10 +3,12 @@ resource_registry:
   OS::TripleO::Services::NovaCompute: OS::Heat::None
   OS::TripleO::Services::NovaLibvirt: OS::Heat::None
 
+{% if 'ovn' in neutron_mechanism_drivers %}
   # These services are disabled my neutron-ovn-standalone.yaml and must be
   # explicitly re-enabled to support Ironic.
   OS::TripleO::Services::NeutronDhcpAgent: {{ tripleo_heat_templates_dir }}/deployment/neutron/neutron-dhcp-container-puppet.yaml
   OS::TripleO::Services::NeutronMetadataAgent: {{ tripleo_heat_templates_dir }}/deployment/neutron/neutron-metadata-container-puppet.yaml
+{% endif %}
 
 parameter_defaults:
   CertmongerCA: local
@@ -22,11 +24,12 @@ parameter_defaults:
   NeutronPhysicalBridge: br-ctlplane
   NeutronFlatNetworks: provision
   NeutronNetworkVLANRanges: ''
-  NeutronMechanismDrivers: ovn,baremetal
+  NeutronMechanismDrivers: {{ neutron_mechanism_drivers|to_json }}
 
-  # configure neutron to always provide routes to the metadata
+  # configure neutron to provide routes to the metadata
   # service via dhcp
-  NeutronEnableForceMetadata: true
+  NeutronIsolatedMetadata: true
+  NeutronEnableMetadataNetwork: true
 
   StandaloneEnableRoutedNetworks: false
   StandaloneHomeDir: {{ standalone_home }}
@@ -41,7 +44,7 @@ parameter_defaults:
     - ipmitool
   IronicEnabledManagementInterfaces:
     - ipmitool
-  IronicCleaningDiskErase: 'metadata'
+  IronicCleaningDiskErase: metadata
   IronicInspectorSubnets:
     - ip_range: "{{ standalone_range_inspection }}"
   IronicInspectorInterface: 'br-ctlplane'

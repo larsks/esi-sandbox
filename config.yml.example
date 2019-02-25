@@ -1,12 +1,24 @@
 ---
+# The playbooks assume that interface "eth1" will be used to host the
+# provisioning network.  You can select another interface here:
+standalone_interface: eth1
+
 # The playbooks define to using 192.168.23.0/24 for the provisioning
 # network, but you can select a differe network here.  All other ip
 # addresses are generated from this variable (see
-# roles/config/defaults/main.yml).
+# roles/config/defaults/main.yml for details).
 standalone_subnet: 192.168.23.0/24
 
-# If you need to add additional arguments to the `openstack tripleo deploy` 
-# command, you can set `deploy_args_extra` here. This will be added *after* 
+# If you need to add additional arguments to the `openstack tripleo deploy`
+# command, you can set `deploy_args_extra` here. This will be added *after*
 # the default deploy arguments.
 deploy_args_extra:
   - "-e ./override-neutron-containers.yaml"
+
+# Tripleo master defaults to using the OVN mechanism driver for Neutron. Ironic
+# requires the `baremetal` driver as well, so the default list of mechanisms is
+# `[ovn, baremetal]`. If you want to use the legacy openvswitch driver instead,
+# you can change the setting here.
+neutron_mechanism_drivers:
+  - openvswitch
+  - baremetal

@@ -1,0 +1,4 @@
+---
+neutron_mechanism_drivers:
+  - ovn
+  - baremetal

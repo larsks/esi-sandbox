@@ -16,8 +16,12 @@ deploy_args:
   - "-r {{ tripleo_heat_templates_dir }}/roles/Standalone.yaml"
   - "-e {{ tripleo_heat_templates_dir }}/environments/services/ironic.yaml"
   - "-e {{ tripleo_heat_templates_dir }}/environments/services/ironic-inspector.yaml"
+
+ovn_deploy_args:
   - "-e {{ tripleo_heat_templates_dir }}/environments/services/neutron-ovn-standalone.yaml"
-  - "-e ./standalone_parameters.yaml"
+
+ovs_deploy_args:
+  - "-e {{ tripleo_heat_templates_dir }}/environments/services/neutron-ovs.yaml"
 
 standalone_networks:
   - name: provisioning
