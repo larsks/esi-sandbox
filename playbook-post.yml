@@ -1,5 +1,6 @@
 ---
-- hosts: controller
+- name: perform post-deploy configuration
+  hosts: controller
   tags: [postdeploy]
   roles:
     - postdeploy/credentials

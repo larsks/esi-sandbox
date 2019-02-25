@@ -1,5 +1,6 @@
 ---
-- hosts: controller
+- name: generate deploy configuration
+  hosts: controller
   tags: [predeploy]
   roles:
     - predeploy/image_prepare

@@ -1,4 +1,6 @@
-- hosts: controller
+---
+- name: prepare host for tripleo deploy
+  hosts: controller
   tags: [hostprep]
   vars:
     ansible_user: root
