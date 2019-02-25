@@ -1,0 +1,14 @@
+---
+- name: ensure local bin directory exists
+  file:
+    path: "{{ ansible_user_dir }}/bin"
+    state: directory
+    mode: "0755"
+
+- name: install scripts
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/bin/{{ item }}"
+    mode: "0755"
+  loop:
+    - add-ipmi-node.sh

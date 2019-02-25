@@ -6,3 +6,4 @@
     - postdeploy/networks
     - postdeploy/deploy_image
     - postdeploy/flavors
+    - postdeploy/tools
