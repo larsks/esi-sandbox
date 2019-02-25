@@ -1,0 +1,12 @@
+---
+# The playbooks define to using 192.168.23.0/24 for the provisioning
+# network, but you can select a differe network here.  All other ip
+# addresses are generated from this variable (see
+# roles/config/defaults/main.yml).
+standalone_subnet: 192.168.23.0/24
+
+# If you need to add additional arguments to the `openstack tripleo deploy` 
+# command, you can set `deploy_args_extra` here. This will be added *after* 
+# the default deploy arguments.
+deploy_args_extra:
+  - "-e ./override-neutron-containers.yaml"

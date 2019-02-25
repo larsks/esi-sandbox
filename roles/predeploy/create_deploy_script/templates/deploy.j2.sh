@@ -4,6 +4,9 @@ deploy_args=(
 {% for arg in deploy_args %}
   {{ arg }}
 {% endfor %}
+{% for arg in deploy_args_extra|default([]) %}
+  {{ arg }}
+{% endfor %}
 )
 
 if [ -f ./local.yaml ]; then
