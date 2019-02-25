@@ -1,0 +1,8 @@
+- hosts: controller
+  tags: [hostprep]
+  vars:
+    ansible_user: root
+  roles:
+    - host/stackuser
+    - host/tripleo_deps
+    - host/packages
