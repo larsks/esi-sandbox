@@ -20,6 +20,8 @@ If you have a large `/` filesystem you will be fine. Alternately, you could moun
 
 Ensure that you can `ssh` into the `root` account on your server using ssh key authentication.
 
+Create a file named `authorized_keys` in the same directory as the playbooks. This file will be used to create `.ssh/authorized_keys` for both the `stack` and `root` accounts.
+
 ## Prepare an Ansible inventory
 
 Create an ansible inventory file in `hosts.yml` with your target system in the `controller` group.  Assuming that the target system was at `192.168.122.54` , your inventory would look like:
