@@ -1,0 +1,6 @@
+---
+controller_packages:
+  - strace
+  - git
+  - tcpdump
+  - ipmitool

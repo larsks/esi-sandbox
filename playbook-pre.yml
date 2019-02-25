@@ -2,6 +2,7 @@
   tags: [hostprep]
   roles:
     - tripleo_deps
+    - packages
 
 - hosts: controller
   tags: [predeploy]

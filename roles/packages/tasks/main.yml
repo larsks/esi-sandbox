@@ -1,0 +1,6 @@
+---
+- name: install packages
+  become: true
+  package:
+    name: "{{ controller_packages }}"
+    state: installed
