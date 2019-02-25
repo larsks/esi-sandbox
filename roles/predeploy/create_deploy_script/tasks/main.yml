@@ -1,6 +1,9 @@
 ---
-- name: create deploy script
+- name: create deploy scripts
   template:
-    src: deploy.j2.sh
-    dest: ./deploy.sh
+    src: "{{ item }}"
+    dest: "{{ item.replace('.j2', '') }}"
     mode: "0755"
+  loop:
+    - deploy.j2.sh
+    - image-prepare.j2.sh
