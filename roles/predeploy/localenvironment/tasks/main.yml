@@ -1,0 +1,13 @@
+---
+- name: ensure remote environment directory exists
+  file:
+    path: "{{ ansible_user_dir }}/environment"
+    state: directory
+  when: local_environment_files
+
+- name: copy local environment files to remote
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/environment/{{ item|basename }}"
+  when: local_environment_files
+  loop: "{{ local_environment_files }}"
