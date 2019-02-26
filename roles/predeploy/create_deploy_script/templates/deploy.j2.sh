@@ -2,6 +2,13 @@
 
 {% include "deploy_args.j2.sh" %}
 
+if ! mkdir /tmp/.deploy.lock; then
+        echo "***ERROR*** It looks like a deploy is already running" >&2
+        exit 1
+fi
+
+trap "rmdir /tmp/.deploy.lock" EXIT
+
 set -x
 openstack tripleo container image prepare \
 	"${deploy_args[@]}" \
