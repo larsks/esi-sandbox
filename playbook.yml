@@ -1,11 +1,21 @@
 ---
+# Install package prerequisites and create the stack user.
 - import_playbook: playbook-host.yml
 
+# The previous play connects to the target system as root. This means
+# that any user-related facts collected by Ansible (such as
+# ansible_user_dir) will be incorrect in subsequent plays. We can
+# correct this by running an explicit setup task as the stack user.
 - name: force metadata refresh
   hosts: controller
   tasks:
     - setup:
 
+# Generate tripleo environment files and the deploy script.
 - import_playbook: playbook-pre.yml
+
+# Run the deploy script.
 - import_playbook: playbook-deploy.yml
+
+# Create OpenStack resources (networks, images, flavors, ...)
 - import_playbook: playbook-post.yml
