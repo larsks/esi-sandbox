@@ -34,6 +34,20 @@ Create an ansible inventory file in `hosts.yml` with your target system in the `
            192.168.122.54:
              ansible_user: stack
 
+## Option 1: Do everything at once
+
+You can perform all the configuration and deployments steps in a single operation by running the top-level `playbook.yml`:
+
+    ansible-playbook playbook.yml
+
+If you are overriding anything in the default configuration, you can include the overrides on the command line. For example, if you had settings in `config.yml`:
+
+    ansible-playbook playbook.yml -e @config.yml
+
+## Option 2: Run steps individually
+
+If you prefer, you can run each step in the process individually. This gives you a chance to examine the changes made in each stage.
+
 ### Run the host playbook
 
 Run the host playbook:
@@ -47,7 +61,7 @@ This will:
 - install tripleo repositories
 - install python-tripleoclient and dependencies
 
-## Run the predeploy playbook
+### Run the predeploy playbook
 
 Run the predeploy playbook:
 
@@ -62,13 +76,13 @@ This playbook will:
 - generate configuration files necessary for deployment
 - generate scripts to run the deployment
 
-## Run the deploy scripts
+### Run the deploy scripts
 
 Log into the target host and run the generated deploy script:
 
         stack$ ./deploy.sh
 
-## Run the post-deploy playbook
+### Run the post-deploy playbook
 
 Run the predeploy playbook:
 
