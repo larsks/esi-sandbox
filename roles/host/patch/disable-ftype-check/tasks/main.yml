@@ -1,0 +1,15 @@
+---
+- name: ensure that ansible-role-container-registry is installed
+  become: true
+  package:
+    name: ansible-role-container-registry
+    state: present
+
+- name: disable check for xfs filesystems with ftype=0
+  tags: [patch, patch/disable-ftype-check]
+  become: true
+  shell: |
+    sed -i '/Check ftype/,/^$/ s/fail:/debug:/' \
+      /usr/share/ansible/roles/container-registry/tasks/docker.yml
+  args:
+    warn: false

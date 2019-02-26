@@ -8,3 +8,4 @@
     - host/stackuser
     - host/tripleo_deps
     - host/packages
+    - host/patch/disable-ftype-check
