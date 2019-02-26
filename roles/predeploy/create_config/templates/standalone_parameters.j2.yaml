@@ -28,7 +28,7 @@ parameter_defaults:
 
   # configure neutron to provide routes to the metadata
   # service via dhcp
-  NeutronIsolatedMetadata: true
+  NeutronEnableIsolatedMetadata: true
   NeutronEnableMetadataNetwork: true
 
   StandaloneEnableRoutedNetworks: false
