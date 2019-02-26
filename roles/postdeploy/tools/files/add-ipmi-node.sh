@@ -7,10 +7,15 @@ ipmi_password=${IRONIC_IPMI_PASSWORD:-password}
 ipmi_port=${IRONIC_IPMI_PORT:-623}
 resource_class=${IRONIC_RESOURCE_CLASS:-baremetal}
 
-OPTS=$(getopt -o 'k:r:H:U:P:p:R:' --long '--resource-class:,--ipmi-username:,--ipmi-password:,--ipmi-host:,--ipmi-port:,--ramdisk:,--kernel:' -n "${0##*/}" -- "$@")
+usage() {
+	echo "${0##*/}: usage: ${0##*/} [--kernel <kernal_image_uuid>] [--ramdisk <ramdisk_image_uuid] [--ipmi-host <host>] [--ipmi-port <port>] [--ipmi-user <user>] [--ipmi-password <password>] [--resource-class <class>] name mac_addr"
+}
+
+OPTS=$(getopt -o 'k:r:H:U:P:p:R:' --long 'resource-class:,ipmi-username:,ipmi-password:,ipmi-host:,ipmi-port:,ramdisk:,kernel:,help' -n "${0##*/}" -- "$@")
 [[ $? -eq 0 ]] || exit 1
 
 eval set -- "$OPTS"
+
 unset OPTS
 while true; do
 	case "$1" in
@@ -42,6 +47,12 @@ while true; do
 			resource_class=$2
 			shift 2
 			;;
+
+		(--help)
+			usage
+			exit 0
+			;;
+
 		(--)	shift
 			break
 			;;
@@ -49,7 +60,7 @@ while true; do
 done
 
 if [ $# -ne 2 ]; then
-	echo "${0##*/}: usage: ${0##*/} [ options ] name mac_addr" >&2
+	usage >&2
 	exit 2
 fi
 
