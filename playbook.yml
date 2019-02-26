@@ -1,5 +1,11 @@
 ---
 - import_playbook: playbook-host.yml
+
+- name: force metadata refresh
+  hosts: controller
+  tasks:
+    - setup:
+
 - import_playbook: playbook-pre.yml
 - import_playbook: playbook-deploy.yml
 - import_playbook: playbook-post.yml
