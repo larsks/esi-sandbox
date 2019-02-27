@@ -4,6 +4,7 @@
   get_url:
     url: "{{ delorean_current_repo }}"
     dest: /etc/yum.repos.d/delorean.repo
+    force: "{{ delorean_force|default(false) }}"
 
 - name: install tripleo-repos
   become: true
