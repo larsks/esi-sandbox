@@ -10,9 +10,9 @@ standalone_interface: eth1
 standalone_subnet: 192.168.23.0/24
 
 # If you need to add additional arguments to the `openstack tripleo deploy`
-# command, you can set `deploy_args_extra` here. This will be added *after*
+# command, you can set `extra_deploy_args` here. This will be added *after*
 # the default deploy arguments.
-deploy_args_extra:
+extra_deploy_args:
   - "-e ./override-neutron-containers.yaml"
 
 # Tripleo master defaults to using the OVN mechanism driver for Neutron. Ironic
